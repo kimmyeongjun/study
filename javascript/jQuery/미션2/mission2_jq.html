@@ -1,0 +1,80 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+body {
+	font-size: 9pt;
+}
+
+#panel1 {
+	border: 1px #000000 solid;
+	line-height: 400px;
+	font-size: 100px;
+	width: 400px;
+	height: 400px;
+	text-align: center;
+	vertical-align: middle;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+
+	var panel1;
+	var nTimerID = 0;
+	var nTotalMember = 0;
+	$(document).on('ready', function() {
+		$('#btn_start').click(function() {
+			nTotalMember = $("#lab_total").val();
+			if (nTimerID == 0) {
+				//입력된 참여인원수를 구해옵니다.
+				nTotalMember = Number(nTotalMember);
+				// 타이머 시작시 #panel1의 글자색을 초기화 시켜 줍니다.
+				$("#panel1").css("color", "#000000");
+				$("#panel1").css("fontSize","200px");
+				nTimerID = setInterval(createNumber, 50);
+			}
+			this.setAttribute("disable", true);
+		});
+		var btnStop = document.getElementById("btn_stop");
+		btnStop.addEventListener("click", function() {
+			if (nTimerID) {
+				clearInterval(nTimerID);
+				nTimerID = 0;
+				//출력효과 추가.
+				 var num = 100 + (Math.random() * 100) + "px";
+
+				$("#panel1").css("color", "#ff0000");
+				$("#panel1").css("fontSize", num);
+			}
+		}, false);
+	});
+
+	// 랜덤하게 1에서 참여인원수 사이의 숫자를 만들어 냅니다.
+	function createNumber() {
+		var nNum = 1 + Math.floor(Math.random() * nTotalMember);
+		//만들어진 숫자를 innerHTML에 대입시켜 줍니다.
+		$("#panel1").text(nNum);
+		// 폰트 크기를 100~200으로 랜덤하게 설정해줍니다.
+		$("#panel1").css("fontSize", nNum);
+	}
+</script>
+</head>
+
+<body>
+	<div>
+		<h4>경품추첨기-ver 0.1</h4>
+		<div id="panel1">
+			1
+			<!-- 이곳에 숫자가 출력됩니다. -->
+		</div>
+		<div id="nav">
+			참여인원 : <input type="text" id="lab_total" value="100">
+			<button id="btn_start">시작</button>
+			<button id="btn_stop">멈춤</button>
+		</div>
+	</div>
+</body>
+</html>

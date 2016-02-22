@@ -1,0 +1,13 @@
+@CHARSET "EUC-KR";
+
+div#popupPart {
+	position: absolute
+}
+
+.listIn {
+	background: #ffff80;
+}
+
+.listOut {
+	background: #FFFFFF;
+}
